@@ -107,17 +107,23 @@ What is the average departure delay for each airline? To answer this with someth
 
 
 ```{r}
+my_flights %>% 
+  group_by(carrier) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  left_join(airlines)
 
-
-````
+```
 
 Which airline had the smallest average departure delay? 
 
 
 
 ```{r}
-
-
+my_flights %>% 
+  group_by(carrier) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  left_join(airlines) %>%
+  arrange(dep_delay)
 
 ```
 
@@ -127,7 +133,8 @@ Question: Which origin–destination pair has the highest average arrival delay?
 
 
 ```{r}
-
+my_flights %>%
+  left_join(airports)
 
 
 ``` 
@@ -146,7 +153,7 @@ Among aircraft with at least 50 flights, which tailnumber has the largest averag
 
 
 ```{r}
-
+left_join(my_flights, planes)
 
 
 ```
